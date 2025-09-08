@@ -221,6 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (finalSymbols[0] === finalSymbols[1] && finalSymbols[1] === finalSymbols[2]) {
                 winnings = (payouts3[finalSymbols[0]] || 0) * currentBet;
+                  // Nếu trúng giải đặc biệt (Jackslot)
+                if (finalSymbols[0] === '💎') {
+                    if (typeof window.updateAchievementStat === 'function') {
+                        // Cập nhật chỉ số 'jackslotWins' để theo dõi thành tựu
+                        updateAchievementStat('jackslotWins', 1);
+                    }
+                }
+                
             } else if (finalSymbols[0] === finalSymbols[1]) {
                 winnings = (payouts2[finalSymbols[0]] || 0) * currentBet;
             } else if (finalSymbols[1] === finalSymbols[2]) {

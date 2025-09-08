@@ -195,6 +195,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasUnclaimedAchievement = playerData.achievements && Object.keys(ACHIEVEMENT_POOL).some(id => {
             const ach = ACHIEVEMENT_POOL[id];
             if (!ach) return false;
+             // KIỂM TRA ĐIỀU KIỆN TIÊN QUYẾT
+            // Nếu thành tựu này có yêu cầu một thành tựu khác phải hoàn thành trước
+            if (ach.preRequisite) {
+                const preReqData = playerData.achievements[ach.preRequisite];
+                // Nếu dữ liệu của thành tựu tiên quyết không tồn tại hoặc chưa được nhận thưởng,
+                // thì không tính thành tựu này là "có thể nhận thưởng"
+                if (!preReqData || !preReqData.claimed) {
+                    return false;
+                }
+            }
+
+
+
+
             const stat = playerData.stats[ach.trackingStat] || 0;
             const progressData = playerData.achievements[id] || { claimed: false };
             return stat >= ach.requiredAmount && !progressData.claimed;

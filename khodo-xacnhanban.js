@@ -109,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
      // Cập nhật chỉ số tổng tiền kiếm được cho thành tựu
         if (typeof window.updateAchievementStat === 'function') {
             updateAchievementStat('totalMoneyEarned', totalProfit);
+             // Cập nhật chỉ số cho thành tựu bán Cải thìa
+            if (id === 'cai-thia') {
+                updateAchievementStat('sold_cai-thia', quantityToSell);
+            }
         }
         // Kiểm tra và cập nhật thành tựu "Nhà Giao Dịch Sành Sỏi"
         if (typeof window.updateAchievementStat === 'function') {
@@ -182,6 +186,10 @@ sellAllBtn.addEventListener('click', async () => {
     const totalProfit = serverProfit * maxQuantity;
      if (typeof window.updateAchievementStat === 'function') {
             updateAchievementStat('totalMoneyEarned', totalProfit);
+             // Cập nhật chỉ số cho thành tựu bán Cải thìa
+            if (id === 'cai-thia') {
+                updateAchievementStat('sold_cai-thia', maxQuantity);
+            }
       }
       if (typeof window.updateAchievementStat === 'function') {
             const soldItems = Array.isArray(playerData.stats.uniqueCropsSoldFromInventory) ? playerData.stats.uniqueCropsSoldFromInventory : [];
